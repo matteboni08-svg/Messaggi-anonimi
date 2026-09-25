@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Organizza · {{ room.title }}{% endblock %}
+{% block content %}
+<section class="card">
+  <div class="pill">Area organizzatore</div>
+  <h1>{{ room.title }}</h1>
+  <p>Condividi questo link con il gruppo:</p>
+  <div class="sharebox"><code>{{ request.host_url.rstrip('/') }}{{ url_for('join_room', code=room.code) }}</code></div>
+  <p class="muted">Codice gruppo: <strong>{{ room.code }}</strong></p>
+</section>
+
+<section class="card">
+  <h2>Partecipanti ({{ participants|length }})</h2>
+  {% if participants %}
+    <ul class="people">
+    {% for p in participants %}
+      <li><span>{{ p.name }}</span><a href="{{ url_for('participant_page', token=p.token, _external=True) }}" target="_blank">link personale</a></li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p>Ancora nessun partecipante.</p>
+  {% endif %}
+
+  {% if room.status == 'open' %}
+    <form method="post" onsubmit="return confirm('Confermi il sorteggio? Dopo non si potranno aggiungere altri partecipanti.');">
+      <input type="hidden" name="action" value="draw">
+      <button type="submit" {% if participants|length < 2 %}disabled{% endif %}>Chiudi e fai il sorteggio</button>
+    </form>
+  {% else %}
+    <div class="success">✓ Sorteggio completato</div>
+  {% endif %}
+</section>
+{% endblock %}

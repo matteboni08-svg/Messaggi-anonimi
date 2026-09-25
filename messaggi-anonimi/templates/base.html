@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Messaggi anonimi{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="wrap">
+    <header class="brand"><a href="/">✉️ Messaggi anonimi</a></header>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}<div class="flash">{% for m in messages %}<div>{{ m }}</div>{% endfor %}</div>{% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+    <footer>Il nome serve solo all'organizzatore. Il destinatario vede esclusivamente il messaggio ricevuto.</footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Il tuo link · {{ p.title }}{% endblock %}
+{% block content %}
+<section class="card">
+  <div class="pill">{{ p.title }}</div>
+  <h1>Ciao {{ p.name }} 👋</h1>
+  {% if p.status == 'open' %}
+    <p>Il tuo messaggio è stato registrato. <strong>Conserva questo link</strong>: dopo il sorteggio, tornando qui vedrai il messaggio assegnato a te.</p>
+    <div class="notice">Il sorteggio non è ancora stato effettuato.</div>
+  {% elif assigned %}
+    <p>Questo è il messaggio anonimo assegnato a te:</p>
+    <blockquote>{{ assigned.message }}</blockquote>
+    <p class="muted">L'autore non viene mostrato.</p>
+  {% else %}
+    <p>Il sorteggio risulta chiuso, ma non c'è ancora un messaggio disponibile.</p>
+  {% endif %}
+</section>
+{% endblock %}

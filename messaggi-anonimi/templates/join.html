@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}{{ room.title }} · Partecipa{% endblock %}
+{% block content %}
+<section class="card">
+  <div class="pill">Gruppo {{ room.code }}</div>
+  <h1>{{ room.title }}</h1>
+  {% if room.status == 'open' %}
+  <p>Scrivi un messaggio. Dopo il sorteggio verrà consegnato casualmente a un'altra persona.</p>
+  <form method="post" class="stack">
+    <label>Il tuo nome
+      <input name="name" maxlength="60" autocomplete="name" required>
+    </label>
+    <label>Il tuo messaggio
+      <textarea name="message" rows="7" maxlength="2000" placeholder="Scrivi qui…" required></textarea>
+    </label>
+    <button type="submit">Invia il messaggio</button>
+  </form>
+  {% else %}
+  <p><strong>Il sorteggio è già stato effettuato.</strong> Non è più possibile partecipare.</p>
+  {% endif %}
+</section>
+{% endblock %}

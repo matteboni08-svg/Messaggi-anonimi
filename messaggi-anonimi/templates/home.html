@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Crea gruppo · Messaggi anonimi{% endblock %}
+{% block content %}
+<section class="card hero">
+  <h1>Scambiatevi un messaggio, in anonimo.</h1>
+  <p>Crea un gruppo, raccogli un messaggio da ciascuno e fai il sorteggio: nessuno riceverà il proprio.</p>
+  <form method="post" class="stack">
+    <label>Nome del gruppo
+      <input name="title" maxlength="80" placeholder="Es. Cena di classe" required>
+    </label>
+    <button type="submit">Crea il gruppo</button>
+  </form>
+</section>
+{% endblock %}
